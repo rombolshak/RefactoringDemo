@@ -15,7 +15,6 @@ public class Customer {
 		return m_Name;
 	}
 
-
 	public void addRental(Rental arg){
 		m_Rentals.add(arg);
 	}
