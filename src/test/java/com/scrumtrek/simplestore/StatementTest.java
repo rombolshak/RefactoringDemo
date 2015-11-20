@@ -1,7 +1,6 @@
 package com.scrumtrek.simplestore;
 
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -17,7 +16,7 @@ public class StatementTest {
         Rental rental = new Rental(movStarWars, 1);
         custMickeyMouse.addRental(rental);
 
-        String statement = custMickeyMouse.Statement();
+        String statement = custMickeyMouse.statement();
 
         Assert.assertTrue(statement.contains("Mickey Mouse"));
     }
@@ -30,7 +29,7 @@ public class StatementTest {
         Rental rental = new Rental(movStarWars, 1);
         custMickeyMouse.addRental(rental);
 
-        String statement = custMickeyMouse.Statement();
+        String statement = custMickeyMouse.statement();
 
         Assert.assertTrue(statement.contains("Star Wars"));
     }
@@ -40,7 +39,7 @@ public class StatementTest {
     {
         Customer custMickeyMouse = new Customer("Mickey Mouse");
 
-        String statement = custMickeyMouse.Statement();
+        String statement = custMickeyMouse.statement();
 
         Assert.assertTrue(statement.contains("Amount owed is 0"));
         Assert.assertTrue(statement.contains("You earned 0 frequent renter points"));
