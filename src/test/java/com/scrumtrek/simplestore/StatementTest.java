@@ -44,4 +44,69 @@ public class StatementTest {
         Assert.assertTrue(statement.contains("Amount owed is 0"));
         Assert.assertTrue(statement.contains("You earned 0 frequent renter points"));
     }
+
+    @Test
+    public void shouldAmountBeCorrectWhenRegularMovieRentedForOneDay()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
+        Rental rental = new Rental(movStarWars, 1);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("Amount owed is 2"));
+    }
+
+    @Test
+    public void shouldAmountBeCorrectWhenNewReleaseMovieRentedForOneDay()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.NewRelease);
+        Rental rental = new Rental(movStarWars, 1);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("Amount owed is 3"));
+    }
+
+    @Test
+    public void shouldAmountBeCorrectWhenChildrenMovieRentedForOneDay()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Childrens);
+        Rental rental = new Rental(movStarWars, 1);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("Amount owed is 1.5"));
+    }
+
+    @Test
+    public void shouldAmountBeCorrectWhenRegularMovieRentedForMoreThanTwoDay()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
+        Rental rental = new Rental(movStarWars, 3);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("Amount owed is 3.5"));
+    }
+
+    @Test
+    public void shouldAmountBeCorrectWhenChildrenMovieRentedForMorThanThreeDay()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Childrens);
+        Rental rental = new Rental(movStarWars, 5);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("Amount owed is 3"));
+    }
 }
