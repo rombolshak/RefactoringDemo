@@ -2,17 +2,13 @@ package com.scrumtrek.simplestore;
 
 class MainClass {
 	 static void Main(String[] args) {
-		Movie movCinderella = new Movie("Cinderella", PriceCodes.Childrens);
-		Movie movStarWars = new Movie("Star Wars", PriceCodes.Regular);
-		Movie movGladiator = new Movie("Gladiator", PriceCodes.NewRelease);
-
 		Customer custMickeyMouse = new Customer("Mickey Mouse");
 		Customer custDonaldDuck = new Customer("Donald Duck");
 		Customer custMinnieMouse = new Customer("Minnie Mouse");
 
-		Rental rental1 = new Rental(movCinderella, 5);
-		Rental rental2 = new Rental(movStarWars, 5);
-		Rental rental3 = new Rental(movGladiator, 5);
+		MovieRental rental1 = new RegularMovieRental("qwe", 5);
+		MovieRental rental2 = new ChildrensMovieRental("asd", 5);
+		MovieRental rental3 = new NewReleaseMovieRental("zxc", 65);
 
 		custMickeyMouse.addRental(rental1);
 		custMickeyMouse.addRental(rental2);
