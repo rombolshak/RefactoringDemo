@@ -109,4 +109,33 @@ public class StatementTest {
 
         Assert.assertTrue(statement.contains("Amount owed is 3"));
     }
+
+    @Test
+    public void shouldFrequentRenterPointsBeSummedWhenSeveralFilmsRented()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.Childrens);
+        Movie movCinderella = new Movie("Cinderella", PriceCodes.Childrens);
+        Rental rental = new Rental(movStarWars, 5);
+        Rental rental1 = new Rental(movCinderella, 5);
+        custMickeyMouse.addRental(rental);
+        custMickeyMouse.addRental(rental1);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("You earned 2 frequent renter points"));
+    }
+
+    @Test
+    public void shouldFrequentRenterPointsBeCorrectWhenNewReleaseRentedForSeveralDays()
+    {
+        Customer custMickeyMouse = new Customer("Mickey Mouse");
+        Movie movStarWars = new Movie("Star Wars", PriceCodes.NewRelease);
+        Rental rental = new Rental(movStarWars, 5);
+        custMickeyMouse.addRental(rental);
+
+        String statement = custMickeyMouse.statement();
+
+        Assert.assertTrue(statement.contains("You earned 2 frequent renter points"));
+    }
 }
