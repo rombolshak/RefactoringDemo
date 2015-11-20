@@ -5,17 +5,13 @@ import java.util.List;
 
 public class Customer {
 	private String m_Name;
-	private List<Rental> m_Rentals = new ArrayList<Rental>();
+	private List<Rental> m_Rentals = new ArrayList<>();
 
 	public Customer(String name) {
 		m_Name = name;
 	}
 
-	public String getName() {
-		return m_Name;
-	}
-
-	public void addRental(Rental arg){
+    public void addRental(Rental arg){
 		m_Rentals.add(arg);
 	}
 
@@ -43,27 +39,40 @@ public class Customer {
     }
 
     private double getRentalAmount(Rental each) {
-        double thisAmount = 0;
         switch(each.getMovie().getPriceCode()) {
             case Regular:
-                thisAmount += 2;
-                if (each.getDaysRented() > 2)
-                {
-                    thisAmount += (each.getDaysRented() - 2) * 1.5;
-                }
-                break;
+                return getRegularMovieRentalAmount(each);
 
             case NewRelease:
-                thisAmount += each.getDaysRented() * 3;
-                break;
+                return getNewReleaseMovieRentalAmount(each);
 
             case Childrens:
-                thisAmount += 1.5;
-                if (each.getDaysRented() > 3)
-                {
-                    thisAmount = (each.getDaysRented() - 3) * 1.5;
-                }
-                break;
+                return getChildrensMovieRentalAmount(each);
+
+            default:
+                throw new IllegalArgumentException("Price code");
+        }
+    }
+
+    private double getChildrensMovieRentalAmount(Rental each) {
+        double thisAmount = 1.5;
+        if (each.getDaysRented() > 3)
+        {
+            thisAmount = (each.getDaysRented() - 3) * 1.5;
+        }
+
+        return thisAmount;
+    }
+
+    private double getNewReleaseMovieRentalAmount(Rental each) {
+        return each.getDaysRented() * 3;
+    }
+
+    private double getRegularMovieRentalAmount(Rental each) {
+        double thisAmount = 2;
+        if (each.getDaysRented() > 2)
+        {
+            thisAmount += (each.getDaysRented() - 2) * 1.5;
         }
 
         return thisAmount;
